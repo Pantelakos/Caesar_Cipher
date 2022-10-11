@@ -1,10 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "EnumReturnCode.h"
 #include "EnumNewInputKeySign.h"
-
-
-using namespace std;
 
     //=================================================================================================
 
@@ -29,11 +27,11 @@ using namespace std;
 
     void saveMessageForOutput(char c_inputMessage[])
     {
-        ofstream savingMessages;
-        savingMessages.open("savedOutputMessages.txt", ios::trunc/*, ios::app*/);
-        savingMessages << c_inputMessage << endl;
+        std::ofstream savingMessages;
+        savingMessages.open("savedOutputMessages.txt", std::ios::trunc/*, ios::app*/);
+        savingMessages << c_inputMessage << std::endl;
         savingMessages.close();
-        cout << "The encryption/decryption was successful." << endl;
+        std::cout << "The encryption/decryption was successful." << std::endl;
     }
 
     //=================================================================================================
@@ -52,7 +50,7 @@ using namespace std;
         }
         else
         {
-            cout << endl << "Error: Wrong input [argv 3]  " << endl;
+            std::cout << std::endl << "Error: Wrong input [argv 3]  " << std::endl;
         }
 
         return cInputKey;
@@ -62,14 +60,20 @@ using namespace std;
 
     void readFileText(char* c_savedOriginalMessage, char* c_argv[2])
     {
-        ifstream readMessage;
-        
+        std::ifstream readMessage;
+        std::string message = c_savedOriginalMessage;
+
+        std::cout << c_argv[2];
         readMessage.open(c_argv[2]);
 
-        for (int i = 0; !readMessage.eof() && readMessage.is_open(); i++)
+        /*for (int i = 0; !readMessage.eof() && readMessage.is_open(); i++)
         {
             readMessage.get(c_savedOriginalMessage[i]);
             c_savedOriginalMessage[i + 1] = '\0';
+        }*/
+
+        while (getline(readMessage, message)) {
+            std::cout << c_savedOriginalMessage;
         }
 
         readMessage.close();
@@ -143,17 +147,16 @@ using namespace std;
 
     int main(int argc, char* argv[])
     {
-        // argv[1] = (E)ncryption or (D)ecryption
-        // argv[2] = Path of the text file
-        // argv[3] = Key (A-Z, a-z)
-        
+       // argv[1] = (E)ncryption or (D)ecryption
+       // argv[2] = Path of a text file
+       // argv[3] = Key (A-Z, a-z)
 
-        char cInputKey;
-        char* savedOriginalMessage = new char[100000];
+       char cInputKey;
+       char* savedOriginalMessage = new char[100000];
 
-        readFileText(savedOriginalMessage, argv);
+       readFileText(savedOriginalMessage, argv);
 
-         cInputKey = getInputKey(*argv[3]);
+       cInputKey = getInputKey(*argv[3]);
 
        if (*argv[1] == 'E' || *argv[1] == 'e')
        {
@@ -165,14 +168,14 @@ using namespace std;
        }
        else
        {
-           cout << endl << "Error: Wrong input [argv 1] " << endl;
+           std::cout << std::endl << "Error: Wrong input [argv 1] " << std::endl;
            return -1;
        }
 
-        if ((*argv[3] >= 97 && *argv[3] <= 122 || *argv[3] >= 65 && *argv[3] <= 90))
-        {
-            saveMessageForOutput(savedOriginalMessage);
-        }
+       if ((*argv[3] >= 97 && *argv[3] <= 122 || *argv[3] >= 65 && *argv[3] <= 90))
+       {
+          saveMessageForOutput(savedOriginalMessage);
+       }
 
         return RC_OK;
     }
