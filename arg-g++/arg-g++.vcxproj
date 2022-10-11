@@ -148,8 +148,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="arg-g++.cpp" />
+    <ClCompile Include="CCryptHandler.cpp" />
+    <ClCompile Include="CFileHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCryptHandler.h" />
+    <ClInclude Include="CFileHandler.h" />
     <ClInclude Include="EnumReturnCode.h" />
     <ClInclude Include="EnumNewInputKeySign.h" />
   </ItemGroup>
