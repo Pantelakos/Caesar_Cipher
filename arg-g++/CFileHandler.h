@@ -15,6 +15,6 @@ class CFileHandler
 		void		readFileText(std::vector<std::string>& a_unencryptedMessage, char* c_argv[2]);
 		void		saveMessageForOutput(char c_inputMessage[]);
 
-		CUtils		utils;
+		CUtils*		utils;
 };
 
