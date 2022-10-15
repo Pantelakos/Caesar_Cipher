@@ -15,9 +15,11 @@
         char cInputKey;
         char* savedOriginalMessage = new char[100000];
         std::vector<std::string> unencryptedMessage;
+        CUtils* util = NULL;
 
         fileHandler.readFileText(unencryptedMessage, argv);
 
+        *savedOriginalMessage = util->convertStringToCharPointer(unencryptedMessage, savedOriginalMessage);
 
         cInputKey = cryptHandler.getInputKey(*argv[3]);
 

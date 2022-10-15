@@ -4,6 +4,7 @@
 
 CFileHandler::CFileHandler()
 {
+    utils = NULL;
 }
 
 //=================================================================================================
@@ -20,7 +21,7 @@ void CFileHandler::readFileText(std::vector<std::string>& a_unencryptedMessage, 
     std::string fileName;
     std::string ch;
 
-    fileName = utils.getFileName(c_argv[2]);
+    fileName = utils->getFileName(c_argv[2]);
     fstream.open(fileName, std::ios::in | std::ios::out);
 
     if (!fstream.is_open()) return;
@@ -36,7 +37,7 @@ void CFileHandler::readFileText(std::vector<std::string>& a_unencryptedMessage, 
 void CFileHandler::saveMessageForOutput(char c_inputMessage[])
 {
     std::ofstream savingMessages;
-    savingMessages.open("savedOutputMessages.txt", std::ios::trunc/*, ios::app*/);
+    savingMessages.open("savedOutputMessage.txt", std::ios::trunc/*, ios::app*/);
     savingMessages << c_inputMessage << std::endl;
     savingMessages.close();
     std::cout << "The encryption/decryption was successful." << std::endl;
