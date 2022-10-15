@@ -14,24 +14,21 @@ CFileHandler::~CFileHandler()
 
 //=================================================================================================
 
-void CFileHandler::readFileText(char* c_savedOriginalMessage, char* c_argv[2])
+void CFileHandler::readFileText(std::vector<std::string>& a_unencryptedMessage, char* c_argv[2])
 {
-    std::ifstream readMessage;
-    std::string message = c_savedOriginalMessage;
+    std::fstream fstream;
+    std::string fileName;
+    std::string ch;
 
-    readMessage.open(c_argv[2]);
+    fileName = utils.getFileName(c_argv[2]);
+    fstream.open(fileName, std::ios::in | std::ios::out);
 
-    /*for (int i = 0; !readMessage.eof() && readMessage.is_open(); i++)
+    if (!fstream.is_open()) return;
+
+    while (std::getline(fstream, ch, '\0'))
     {
-        readMessage.get(c_savedOriginalMessage[i]);
-        c_savedOriginalMessage[i + 1] = '\0';
-    }*/
-
-    while (getline(readMessage, message)) {
-        std::cout << c_savedOriginalMessage;
+            a_unencryptedMessage.push_back(ch);
     }
-
-    readMessage.close();
 }
 
 //=================================================================================================

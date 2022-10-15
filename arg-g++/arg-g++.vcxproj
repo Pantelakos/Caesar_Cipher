@@ -150,12 +150,14 @@
     <ClCompile Include="arg-g++.cpp" />
     <ClCompile Include="CCryptHandler.cpp" />
     <ClCompile Include="CFileHandler.cpp" />
+    <ClCompile Include="CUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCryptHandler.h" />
     <ClInclude Include="CFileHandler.h" />
     <ClInclude Include="EnumReturnCode.h" />
     <ClInclude Include="EnumNewInputKeySign.h" />
+    <ClInclude Include="CUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
