@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "CCryptHandler.h"
 #include "CFileHandler.h"
 
@@ -13,8 +14,10 @@
 
         char cInputKey;
         char* savedOriginalMessage = new char[100000];
+        std::vector<std::string> unencryptedMessage;
 
-        fileHandler.readFileText(savedOriginalMessage, argv);
+        fileHandler.readFileText(unencryptedMessage, argv);
+
 
         cInputKey = cryptHandler.getInputKey(*argv[3]);
 
